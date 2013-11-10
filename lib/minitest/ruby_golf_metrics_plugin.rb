@@ -20,15 +20,26 @@ module Minitest
           begin
             source = RubyGolf.method(erg.method_name).source
             size = source.strip.gsub(" ", "").size
-            io.puts "  #{erg.method_name}: #{size} characters"
+            io.puts "  #{colorize(erg.method_name, 32)}: #{size} characters"
           rescue NoMethodError
-            io.puts "  #{erg.method_name}: UNDEFINED"
+            io.puts "  #{colorize(erg.method_name, 31)}: UNDEFINED"
           end
         else
-          io.puts "  #{erg.method_name}: FAILED"
+          io.puts "  #{colorize(erg.method_name, 31)}: FAILED"
         end
       end
       io.puts
+    end
+
+    private
+    def colorize(text, color)
+      options[:nocolor] ? text : "\e[#{color}m#{text}\e[0m"
+    end
+  end
+
+  def self.plugin_ruby_golf_metrics_options(opts, options)
+    opts.on "--nocolor", "Report metrics without color" do
+      options[:nocolor] = true
     end
   end
 
