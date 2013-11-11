@@ -1,4 +1,4 @@
-require "method_source"
+require "sourcify"
 
 module Minitest
 
@@ -18,7 +18,7 @@ module Minitest
       @ergs.sort_by(&:method_name).each do |erg|
         if erg.passed
           begin
-            source = RubyGolf.method(erg.method_name).source
+            source = RubyGolf.method(erg.method_name).to_raw_source(strip_enclosure: true)
             size = source.strip.gsub(" ", "").size
             io.puts "  #{colorize(erg.method_name, 32)}: #{size} characters"
           rescue NoMethodError
