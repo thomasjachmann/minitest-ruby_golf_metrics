@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Minitest::RubyGolfMetrics::VERSION
   spec.authors       = ["Thomas Jachmann"]
   spec.email         = ["self@thomasjachmann.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Provide metrics for evaluating ruby golf solutions concerning code length when running minitests.}
+  spec.summary       = %q{Ruby Golf Metrics Plugin for Minitest}
+  spec.homepage      = "https://github.com/thomasjachmann/minitest-ruby_golf_metrics"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
