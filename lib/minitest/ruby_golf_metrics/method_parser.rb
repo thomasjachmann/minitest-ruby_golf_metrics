@@ -25,6 +25,9 @@ module Minitest
         # now check if it is a function call or command, and check the method name
         if [:command, :fcall].include? ast[0]
           ast[1].include?(method_name.to_s)
+        elsif ast[0] == :command_call
+          ast[1][0] == :var_ref && ast[1][1].include?("RubyGolf")
+          ast[3].include?(method_name.to_s)
         else
           false
         end
