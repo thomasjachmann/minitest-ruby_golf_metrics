@@ -22,7 +22,7 @@ module Minitest
           if erg.passed
             begin
               source = RubyGolf.method(erg.method_name).to_raw_source(strip_enclosure: true)
-              size = source.strip.gsub(" ", "").size
+              size = source.strip.gsub(/\s+/, "").size
               io.puts "  #{colorize(erg.method_name, 32)}: #{size} characters"
             rescue NoMethodError
               io.puts "  #{colorize(erg.method_name, 31)}: UNDEFINED"
