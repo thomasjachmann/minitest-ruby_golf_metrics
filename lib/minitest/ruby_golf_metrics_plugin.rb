@@ -1,4 +1,4 @@
-require "minitest/ruby_golf_metrics/reporter"
+require "minitest/ruby_golf_metrics"
 
 module Minitest
 
