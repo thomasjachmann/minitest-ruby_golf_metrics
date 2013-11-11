@@ -10,13 +10,14 @@ module Minitest
       Erg = Struct.new(:method_name, :passed)
 
       class TestMethod
-        def initialize(method_name)
+        def initialize(method_name, previous_method_stack = [])
+          method_stack = previous_method_stack + [method_name]
           @method_name = method_name
           source = RubyGolf.method(method_name).to_raw_source(strip_enclosure: true)
           @size = source.strip.gsub(/\s+/, "").size
           parser = MethodParser.new(source)
-          @children = RubyGolf.methods(false).map do |method|
-            TestMethod.new(method) if parser.is_method_called?(method)
+          @children = (RubyGolf.methods(false) - method_stack).map do |method|
+            TestMethod.new(method, method_stack) if parser.is_method_called?(method)
           end.compact
         end
 
