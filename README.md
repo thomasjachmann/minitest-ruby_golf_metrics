@@ -1,6 +1,16 @@
 # Minitest::RubyGolfMetrics
 
-TODO: Write a gem description
+This is a [Minitest](https://github.com/seattlerb/minitest) plugin that can be
+used to play [Ruby Golf](http://www.sitepoint.com/ruby-golf/).
+
+It makes some assumptions which make it unusable for you if you don't play the
+game after its rules:
+
+* your tasks are tested in the minitest class ```RubyGolfTest```
+* the contestants implement their solutions as module methods in the module
+  ```RubyGolf```
+
+That's it.
 
 ## Installation
 
@@ -12,13 +22,12 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install minitest-ruby_golf_metrics
-
 ## Usage
 
-TODO: Write usage instructions here
+Run your minitests and check your results.
+
+You can provide the parameter --nocolor to prevent the metrics output form being
+colorized.
 
 ## Contributing
 
