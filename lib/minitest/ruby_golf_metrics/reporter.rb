@@ -21,7 +21,7 @@ module Minitest
 
       def report
         io.puts "\nRuby Golf Metrics"
-        @ergs.each do |method_name, ergs|
+        @ergs.sort.each do |method_name, ergs|
           begin
             if ergs.all?
               begin
