@@ -6,30 +6,32 @@ module Minitest
 
     class Reporter < ::Minitest::Reporter
 
-      Erg = Struct.new(:method_name, :passed)
-
       def start
-        @ergs = []
+        @ergs = {}
       end
 
       def record(erg)
-        @ergs << Erg.new(erg.location.gsub("RubyGolfTest#test_", "").gsub(/ .*/, ""), erg.passed?)
+        method_name = erg.location.
+          gsub("RubyGolfTest#test_", "").
+          gsub(/_[0-9]+.*$/, "")
+        @ergs[method_name] ||= []
+        @ergs[method_name] << erg.passed?
       end
 
       def report
         io.puts "\nRuby Golf Metrics"
-        @ergs.sort_by(&:method_name).each do |erg|
-          if erg.passed
+        @ergs.each do |method_name, ergs|
+          if ergs.all?
             begin
-              counter = CharacterCounter.new(erg.method_name)
-              msg = "  #{colorize(erg.method_name, 32)}: #{counter.cumulative_size} characters"
+              counter = CharacterCounter.new(method_name)
+              msg = "  #{colorize(method_name, 32)}: #{counter.cumulative_size} characters"
               msg << " (#{counter.called_method_sizes.join(", ")})" if !counter.self_contained?
               io.puts msg
             rescue NoMethodError
-              io.puts "  #{colorize(erg.method_name, 31)}: UNDEFINED"
+              io.puts "  #{colorize(method_name, 31)}: UNDEFINED"
             end
           else
-            io.puts "  #{colorize(erg.method_name, 31)}: FAILED"
+            io.puts "  #{colorize(method_name, 31)}: FAILED"
           end
         end
       end
