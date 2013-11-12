@@ -8,8 +8,8 @@ module Minitest
     class CharacterCounter
 
       def initialize(method_name, previous_method_stack = [])
-        method_stack = previous_method_stack + [method_name]
-        @method_name = method_name
+        @method_name = method_name.to_sym
+        method_stack = previous_method_stack + [@method_name]
         source = RubyGolf.method(method_name).to_raw_source(strip_enclosure: true)
         @size = source.strip.gsub(/\s+/, "").size
         parser = MethodParser.new(source)
