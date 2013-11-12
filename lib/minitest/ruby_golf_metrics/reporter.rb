@@ -21,17 +21,21 @@ module Minitest
       def report
         io.puts "\nRuby Golf Metrics"
         @ergs.each do |method_name, ergs|
-          if ergs.all?
-            begin
-              counter = CharacterCounter.new(method_name)
-              msg = "  #{colorize(method_name, 32)}: #{counter.cumulative_size} characters"
-              msg << " (#{counter.called_method_sizes.join(", ")})" if !counter.self_contained?
-              io.puts msg
-            rescue NoMethodError
-              io.puts "  #{colorize(method_name, 31)}: UNDEFINED"
+          begin
+            if ergs.all?
+              begin
+                counter = CharacterCounter.new(method_name)
+                msg = "  #{colorize(method_name, 32)}: #{counter.cumulative_size} character(s)"
+                msg << " (#{counter.called_method_sizes.join(", ")})" if !counter.self_contained?
+                io.puts msg
+              rescue NoMethodError
+                io.puts "  #{colorize(method_name, 31)}: UNDEFINED"
+              end
+            else
+              io.puts "  #{colorize(method_name, 31)}: FAILED"
             end
-          else
-            io.puts "  #{colorize(method_name, 31)}: FAILED"
+          rescue
+            io.puts "  #{colorize(method_name, 31)}: there was an error counting your characters"
           end
         end
       end
