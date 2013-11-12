@@ -4,7 +4,7 @@ This is a [Minitest](https://github.com/seattlerb/minitest) plugin that can be
 used to play [Ruby Golf](http://www.sitepoint.com/ruby-golf/).
 
 It makes some assumptions which make it unusable for you if you don't play the
-game after its rules:
+game by its rules:
 
 * your tasks are tested in the minitest class ```RubyGolfTest```
 * the contestants implement their solutions as module methods in the module
