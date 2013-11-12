@@ -14,7 +14,7 @@ module Minitest
         method_name = erg.location.
           gsub("RubyGolfTest#test_", "").
           gsub(/ .*$/, "").
-          gsub(/_[0-9]+/, "")
+          gsub(/_[0-9].*/, "")
         @ergs[method_name] ||= []
         @ergs[method_name] << erg.passed?
       end
