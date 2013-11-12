@@ -17,7 +17,7 @@ module Minitest
       end
 
       def report
-        io.puts "Ruby Golf Metrics"
+        io.puts "\nRuby Golf Metrics"
         @ergs.sort_by(&:method_name).each do |erg|
           if erg.passed
             begin
@@ -32,7 +32,6 @@ module Minitest
             io.puts "  #{colorize(erg.method_name, 31)}: FAILED"
           end
         end
-        io.puts
       end
 
       private
