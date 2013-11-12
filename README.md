@@ -26,7 +26,7 @@ And then execute:
 
 Run your minitests and check your results.
 
-You can provide the parameter --nocolor to prevent the metrics output form being
+You can provide the parameter --nocolor to prevent the metrics output from being
 colorized.
 
 ## Contributing
