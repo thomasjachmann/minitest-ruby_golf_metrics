@@ -13,7 +13,8 @@ module Minitest
       def record(erg)
         method_name = erg.location.
           gsub("RubyGolfTest#test_", "").
-          gsub(/_[0-9]+.*$/, "")
+          gsub(/ .*$/, "").
+          gsub(/_[0-9]+/, "")
         @ergs[method_name] ||= []
         @ergs[method_name] << erg.passed?
       end
