@@ -9,6 +9,7 @@ game by its rules:
 * your tasks are tested in the minitest class ```RubyGolfTest```
 * the contestants implement their solutions as module methods in the module
   ```RubyGolf```
+* the test methods are called test_hole_<x>_<method_name>[_<numeric_suffix>]
 
 That's it.
 
