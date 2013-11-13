@@ -15,7 +15,7 @@ module Minitest
           gsub("RubyGolfTest#test_", "").
           gsub(/ .*$/, "").
           gsub(/_[0-9]$/, "").
-          gsub(/(hole)_([0-9]+)_/, "\\1 \\2#")
+          gsub(/hole_([0-9]+)_/, "\\2#")
         @ergs[method_definition] ||= []
         @ergs[method_definition] << erg.passed?
       end
@@ -46,7 +46,8 @@ module Minitest
       private
 
       def colorize(hole, method_name, color)
-        options[:nocolor] ? text : "\e[#{color}m#{hole} - #{method_name}\e[0m"
+        text = "Hole #{hole} (#{method_name})"
+        options[:nocolor] ? text : "\e[#{color}m#{text}\e[0m"
       end
 
     end
